@@ -45,12 +45,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	MSG msg = { }; //메세지 구조체
 
-	while (GetMessage(&msg, NULL, 0, 0)) //메세지가 있을때까지 계속 돌아감 -> 아마 다른창 볼때 멈추면 이상하니까 이렇게 한듯
+	while (true)
 	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-		//여기가 윈도우 TICK() 임 메세지 루프 
-		//대기
+
+		while (PeekMessage(&msg, NULL, 0, 0,PM_REMOVE)) //메세지가 있을때까지 계속 돌아감 -> 아마 다른창 볼때 멈추면 이상하니까 이렇게 한듯
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+			//여기가 윈도우 TICK() 임 메세지 루프 
+			//대기
+		}
 	}
 
 
@@ -62,8 +66,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	Transform* transform = reinterpret_cast<Transform*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+	//Transform* transform = static_cast<Transform*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
 	//요거 질문 왜 AI는 static_cast로 사용했는가? 포인터인데?
+	//윈도우 운영체제에서 만들어진 규칙이었다. 그냥 숨기려고 은닉을 하기 위해서 
 
+	//암시적 명시적 형변환 설명 쉽게 
+	//enum
 	switch (uMsg)
 	{
 	case WM_CREATE:
@@ -82,6 +90,7 @@ LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 	case WM_KEYDOWN:
 	{
+
 		if (transform)
 		{
 			switch (wParam)
@@ -101,7 +110,9 @@ LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 			}
 
 		}
+
 		InvalidateRect(hwnd, NULL, TRUE);
+		//더블버퍼링 대신에 사용함 
 		return 0;
 	}
 	case WM_PAINT:
