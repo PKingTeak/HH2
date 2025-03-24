@@ -92,7 +92,7 @@ LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 		Transform* newtransform = new Transform(100, 100, 100, 100);
 		SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(newtransform));
 		
-		Himage = new MYImage(L"D:\\HH2\\HH2\\resource\\test.png", 100, 100);
+		Himage = new MYImage(L"D:\\HH2\\HH2\\resource\\test.png", 0, 0);
 
 		
 		break;
