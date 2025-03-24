@@ -22,8 +22,8 @@ MYImage::MYImage(const wchar_t* _Path, int _x, int _y)
 	Y = _y;
 	if (Image && Image->GetLastStatus() == Gdiplus::Ok)
 	{
-		width = Image->GetWidth();
-		height = Image->GetHeight();
+		width = Image->GetWidth()/2;
+		height = Image->GetHeight()/2;
 	}
 	else
 	{

@@ -89,7 +89,7 @@ LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	case WM_CREATE:
 	{
 
-		Transform* newtransform = new Transform(100, 100, 100, 100);
+		Transform* newtransform = new Transform(300, 300, 100, 100);
 		SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(newtransform));
 		
 		Himage = new MYImage(L"D:\\HH2\\HH2\\resource\\test.png", 0, 0);
