@@ -1,10 +1,12 @@
 #pragma once
 #include<Windows.h>
-class Image
+#include <gdiplus.h>
+#pragma comment(lib, "gdiplus.lib")
+class MYImage
 {
 public:
-	Image(const wchar_t* _Path, int _x = 0, int _y =0); //파일 주소 필요한걸로 알고있음 사진 
-	~Image();	
+	MYImage(const wchar_t* _Path, int _x = 0, int _y =0); //파일 주소 필요한걸로 알고있음 사진 
+	~MYImage();	
 
 
 	void Draw(HDC& hdc);
@@ -18,7 +20,7 @@ public:
 private:
 	
 
-	HBITMAP hBitmap;
+	Gdiplus::Image* image; 
 	int X, Y;
 	int width, height;
 

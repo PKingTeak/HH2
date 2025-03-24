@@ -1,13 +1,18 @@
 ﻿#include <windows.h>
 #include <conio.h>
+#include <gdiplus.h>
 #include "EngineBase/Transform.h"
+#include "EngineBase/MYImage.h"
 
 // 윈도우 프로시저 함수 선언
 LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+MYImage* Himage = nullptr; //이미지 포인터 생성
+ULONG_PTR  gdiplusToken; //GDI+ 토큰이 필요함 
 
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) //윈도우 메인함수 histance는 왜 값일까? 포인터로 주면 본체에도 영향이 가기 때문에 값으로 준다.
 {
+#pragma region BaseSettingWindow
 	// 윈도우 클래스 설정
 	const char CLASS_NAME[] = "MainWindow";  //char는 멀티바이트 일때 사용하고 wchar_t는 유니코드 일때 사용한다. char는 1바이트 wchar_t는 2바이트이며 한글을 표현할때 사용한다. 
 	WNDCLASS wc = { };
@@ -37,9 +42,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		return 0;
 	}
 
-	//사각형 생성 움직이기
-	//Transform transform(100, 100, 100, 100); //사각형 생성  
-
+#pragma endregion
 
 	ShowWindow(hwnd, nCmdShow);
 	// 메시지 루프
@@ -79,12 +82,18 @@ LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	{
 		Transform* newtransform = new Transform(100, 100, 100, 100);
 		SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(newtransform));
+		Himage = new MYImage(L"resource/test.png", 400, 400);
 		break;
 	}
 	case WM_DESTROY:
 		if (transform)
 		{
 			delete transform;
+		}
+		if (Himage)
+		{
+			delete Himage;
+			Gdiplus::GdiplusShutdown(gdiplusToken); //이걸 해야 해제됨 
 		}
 		PostQuitMessage(0);
 		return 0;
