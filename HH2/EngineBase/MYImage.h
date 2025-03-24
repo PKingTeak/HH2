@@ -20,7 +20,7 @@ public:
 private:
 	
 
-	Gdiplus::Image* image; 
+	Gdiplus::Image* Image; 
 	int X, Y;
 	int width, height;
 

@@ -1,0 +1,1 @@
+[GDI+] Trying to load image: resource\test_simple.png

@@ -12,9 +12,15 @@ ULONG_PTR  gdiplusToken; //GDI+ 토큰이 필요함
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) //윈도우 메인함수 histance는 왜 값일까? 포인터로 주면 본체에도 영향이 가기 때문에 값으로 준다.
 {
+
+	Gdiplus::GdiplusStartupInput gdiplusStartupInput;
+	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, nullptr);
+
+	SetCurrentDirectory(L"D:\\HH2\\HH2\\");  // 실행 시 리소스 루트로 강제 이동
+
 #pragma region BaseSettingWindow
 	// 윈도우 클래스 설정
-	const char CLASS_NAME[] = "MainWindow";  //char는 멀티바이트 일때 사용하고 wchar_t는 유니코드 일때 사용한다. char는 1바이트 wchar_t는 2바이트이며 한글을 표현할때 사용한다. 
+	const wchar_t  CLASS_NAME[] = L"MainWindow";  //char는 멀티바이트 일때 사용하고 wchar_t는 유니코드 일때 사용한다. char는 1바이트 wchar_t는 2바이트이며 한글을 표현할때 사용한다. 
 	WNDCLASS wc = { };
 	wc.lpfnWndProc = MainWindowProc; // RectWIndowPROC를 윈도우 프로시저로 설정
 	wc.hInstance = hInstance;
@@ -26,7 +32,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	HWND hwnd = CreateWindowEx(
 		0,                              // 확장 윈도우 스타일
 		CLASS_NAME,                     // 윈도우 클래스 이름
-		"MYWindow",                  // 윈도우 제목
+		L"MYWindow",                  // 윈도우 제목
 		WS_OVERLAPPEDWINDOW,            // 윈도우 스타일
 		// 윈도우 크기와 위치
 		CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
@@ -44,9 +50,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 #pragma endregion
 
+
 	ShowWindow(hwnd, nCmdShow);
 	// 메시지 루프
-
+	
 	MSG msg = { }; //메세지 구조체
 
 	while (true)
@@ -70,6 +77,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	Transform* transform = reinterpret_cast<Transform*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+	
 	//Transform* transform = static_cast<Transform*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
 	//요거 질문 왜 AI는 static_cast로 사용했는가? 포인터인데?
 	//윈도우 운영체제에서 만들어진 규칙이었다. 그냥 숨기려고 은닉을 하기 위해서 
@@ -80,9 +88,13 @@ LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	{
 	case WM_CREATE:
 	{
+
 		Transform* newtransform = new Transform(100, 100, 100, 100);
 		SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(newtransform));
-		Himage = new MYImage(L"resource/test.png", 400, 400);
+		
+		Himage = new MYImage(L"D:\\HH2\\HH2\\resource\\test.png", 100, 100);
+
+		
 		break;
 	}
 	case WM_DESTROY:
@@ -134,9 +146,14 @@ LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 		HBRUSH hBrush = CreateSolidBrush(RGB(0, 255, 0)); //일단 초록색 RGB(0,255,0)으로 설정
 		SelectObject(hdc, hBrush);
 
+		Himage->Draw(hdc);
+
 		RECT rect;
 		transform->GetRect(rect);
 		Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+
+
+		
 
 		DeleteObject(hBrush);
 		EndPaint(hwnd, &ps);
