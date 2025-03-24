@@ -16,7 +16,6 @@ public:
 	}
 
 private:
-	bool LoadImage(const wchar_t* _Path); //이미지 로드 해야함 
 	
 
 	HBITMAP hBitmap;
