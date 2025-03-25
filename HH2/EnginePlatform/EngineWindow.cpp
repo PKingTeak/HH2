@@ -1,6 +1,6 @@
 #include "EngineWindow.h"
 
-bool EngineWindow::WindowLive = false;
+bool EngineWindow::WindowLive = true;
 HINSTANCE EngineWindow::hInstance;
 
 EngineWindow& EngineWindow::GetInstance()
@@ -80,23 +80,8 @@ void EngineWindow::WindowOpen(std::string_view _WindowName, std::pair<int, int> 
 
 
 	ShowWindow(hwnd, SW_SHOW);
+	UpdateWindow(hwnd);
 	// 메시지 루프
-
-	MSG msg = { }; //메세지 구조체
-
-	while (true)
-	{
-
-		while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) //메세지가 있을때까지 계속 돌아감 -> 아마 다른창 볼때 멈추면 이상하니까 이렇게 한듯
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-			//여기가 윈도우 TICK() 임 메세지 루프 
-			//대기
-		}
-	}
-
-	//위에 코드들 다 지워도 됨
 
 
 
