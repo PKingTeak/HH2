@@ -71,96 +71,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 
 	return 0;
+
+	//위에 코드들 다 지워도 됨
+
+
+
+
 }
 
 // 윈도우 프로시저 함수 정의
-LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-	Transform* transform = reinterpret_cast<Transform*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
-	
-	//Transform* transform = static_cast<Transform*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
-	//요거 질문 왜 AI는 static_cast로 사용했는가? 포인터인데?
-	//윈도우 운영체제에서 만들어진 규칙이었다. 그냥 숨기려고 은닉을 하기 위해서 
-
-	//암시적 명시적 형변환 설명 쉽게 
-	//enum
-	switch (uMsg)
-	{
-	case WM_CREATE:
-	{
-
-		Transform* newtransform = new Transform(300, 300, 100, 100);
-		SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(newtransform));
-		
-		Himage = new MYImage(L"D:\\HH2\\HH2\\resource\\test.png", 0, 0);
-
-		
-		break;
-	}
-	case WM_DESTROY:
-		if (transform)
-		{
-			delete transform;
-		}
-		if (Himage)
-		{
-			delete Himage;
-			Gdiplus::GdiplusShutdown(gdiplusToken); //이걸 해야 해제됨 
-		}
-		PostQuitMessage(0);
-		return 0;
-
-	case WM_KEYDOWN:
-	{
-
-		if (transform)
-		{
-			switch (wParam)
-			{
-			case VK_LEFT:
-				transform->Move(-10, 0);
-				break;
-			case VK_RIGHT:
-				transform->Move(10, 0);
-				break;
-			case VK_UP:
-				transform->Move(0, -10);
-				break;
-			case VK_DOWN:
-				transform->Move(0, 10);
-				break;
-			}
-
-		}
-
-		InvalidateRect(hwnd, NULL, TRUE);
-		//더블버퍼링 대신에 사용함 
-		return 0;
-	}
-	case WM_PAINT:
-	{
-		PAINTSTRUCT ps;
-		HDC hdc = BeginPaint(hwnd, &ps);
-
-		FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
-		HBRUSH hBrush = CreateSolidBrush(RGB(0, 255, 0)); //일단 초록색 RGB(0,255,0)으로 설정
-		SelectObject(hdc, hBrush);
-
-		Himage->Draw(hdc);
-
-		RECT rect;
-		transform->GetRect(rect);
-		Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
-
-
-		
-
-		DeleteObject(hBrush);
-		EndPaint(hwnd, &ps);
-	}
-
-	return 0;
-	}
-
-	return DefWindowProc(hwnd, uMsg, wParam, lParam);
-}
