@@ -1,0 +1,2 @@
+﻿  EngineWindow.cpp
+D:\HH2\HH2\EnginePlatform\EngineWindow.cpp(26,1): error C4700: 초기화되지 않은 'ps' 지역 변수를 사용했습니다.

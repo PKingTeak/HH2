@@ -1,0 +1,103 @@
+#include "EngineWindow.h"
+
+bool EngineWindow::WindowLive = false;
+HINSTANCE EngineWindow::hInstance;
+
+EngineWindow& EngineWindow::GetInstance()
+{
+	static EngineWindow instance;
+	return instance; //싱글톤 
+}
+
+
+void EngineWindow::Init(HINSTANCE _hInstance)
+{
+	hInstance = _hInstance;
+}
+
+LRESULT CALLBACK EngineWindow::MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+
+	switch (uMsg)
+	{
+	case WM_PAINT:
+	{
+		PAINTSTRUCT ps;              
+		HDC hdc = BeginPaint(hwnd, &ps); 
+		EndPaint(hwnd, &ps);
+	}
+
+	break;
+	case WM_DESTROY:
+	{
+		WindowLive = false;
+		break;
+	}
+	default:
+		return DefWindowProcW(hwnd, uMsg, wParam, lParam);
+
+	}
+
+	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+
+
+
+void EngineWindow::WindowOpen(std::string_view _WindowName, std::pair<int, int> _StartPos, std::pair<int, int> _Scale)
+{
+#pragma region BaseSettingWindow
+	// 윈도우 클래스 설정
+	const wchar_t  CLASS_NAME[] = L"MyWindow";  //char는 멀티바이트 일때 사용하고 wchar_t는 유니코드 일때 사용한다. char는 1바이트 wchar_t는 2바이트이며 한글을 표현할때 사용한다. 
+	WNDCLASS wc = { };
+	wc.lpfnWndProc = MainWindowProc; // RectWIndowPROC를 윈도우 프로시저로 설정
+	wc.hInstance = hInstance;
+	wc.lpszClassName = CLASS_NAME;
+	RegisterClass(&wc);
+	// 윈도우 생성
+	//일단 CreateWindowEx()를 돌기전에 MainWindowProc()로 가는데 이유는 우리는 wc.hIcon ~ lpszMenuName 까지 설정을 안했기 때문에 기본설정을 윈도우가 해주기 때문에
+	// MainWindowProc() 에서 DefWindowProc가 먼저 호출된다. 
+	HWND hwnd = CreateWindowEx(
+		0,                              // 확장 윈도우 스타일
+		CLASS_NAME,                     // 윈도우 클래스 이름
+		L"MyWindow",                  // 윈도우 제목
+		WS_OVERLAPPEDWINDOW,            // 윈도우 스타일
+		// 윈도우 크기와 위치
+		CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+
+		NULL,       // 부모 윈도우 -> 느낌이 여러개의 윈도우를 띄울때 사용하는듯
+		NULL,       // 메뉴
+		hInstance,  // 인스턴스 핸들
+		NULL        // 추가 애플리케이션 데이터
+	);
+
+	if (hwnd == NULL)
+	{
+		return;
+	}
+
+#pragma endregion
+
+
+	ShowWindow(hwnd, SW_SHOW);
+	// 메시지 루프
+
+	MSG msg = { }; //메세지 구조체
+
+	while (true)
+	{
+
+		while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) //메세지가 있을때까지 계속 돌아감 -> 아마 다른창 볼때 멈추면 이상하니까 이렇게 한듯
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+			//여기가 윈도우 TICK() 임 메세지 루프 
+			//대기
+		}
+	}
+
+	//위에 코드들 다 지워도 됨
+
+
+
+}

@@ -1,3 +1,2 @@
-﻿  EngineWindow.cpp
-D:\HH2\HH2\EngineCore\EngineWindow.cpp(44,8): warning C4101: 'rect' :참조되지 않은 지역 변수입니다.
+﻿  Core.cpp
   EngineCore.vcxproj -> D:\HH2\HH2\x64\Debug\EngineCore.lib
