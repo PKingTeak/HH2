@@ -23,8 +23,16 @@ public:
 	{
 		return WindowLive;
 	}
+	
+	HDC GetHDC() const;
+	
 
 private:
+
+	inline void SetHDC(HDC _Hdc)
+	{
+		wHdc = _Hdc;
+	}
 
 	EngineWindow() = default; //기본생성자
 	static LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -35,6 +43,7 @@ private:
 	std::pair<int, int> WindowSize;
 
 	HWND hWnd = nullptr;
+	HDC wHdc = nullptr;
 	static bool WindowLive; //윈도우창 켜져있나?
 	static HINSTANCE hInstance; //인스턴스 핸들
 	

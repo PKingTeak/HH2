@@ -22,6 +22,16 @@ class FileLoad
 	bool LoadAsText(); //텍스트로 로드 
 	bool LoadAsBinary(); //바이너리로 로드
 
+	inline std::string GetText()const
+	{
+		return std::string(Buffer.begin(), Buffer.end());
+	}
+
+	inline const std::vector<char>& GetBuffer() const
+	{
+
+		return Buffer; //이건 수정 못하게 
+	}
 
 private:
 	std::filesystem::path FilePath;

@@ -91,12 +91,20 @@ bool FileLoad::LoadAsText()
 
 bool FileLoad::LoadAsBinary()
 {
-	if (!IsFile())
-	{
-		return false;
-	}
+	if (!IsFile()) return false;
 
-	
+	std::ifstream inFile(FilePath, std::ios::binary | std::ios::ate);
+	if (!inFile) return false;
 
+	std::streamsize size = inFile.tellg();
+	inFile.seekg(0, std::ios::beg);
+
+	Buffer.resize(size);
+	inFile.read(Buffer.data(), size);
+	inFile.close();
+	isLoaded = true;
+	return true;
+
+	//이건 베껴옴 대신 분석해보자
 }
 

@@ -16,7 +16,7 @@ MYImage::MYImage(const wchar_t* _Path, int _x, int _y)
 	{
 		MessageBox(NULL, L"이미지 로딩 실패!", L"오류", MB_OK | MB_ICONERROR);
 	}
-	Image = Gdiplus::Image::FromFile(_Path);
+	//Image = Gdiplus::Image::FromFile(_Path);
 
 	X = _x;
 	Y = _y;

@@ -13,6 +13,7 @@ EngineWindow& EngineWindow::GetInstance()
 void EngineWindow::Init(HINSTANCE _hInstance)
 {
 	hInstance = _hInstance;
+	
 }
 
 LRESULT CALLBACK EngineWindow::MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -24,6 +25,7 @@ LRESULT CALLBACK EngineWindow::MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wPara
 	{
 		PAINTSTRUCT ps;              
 		HDC hdc = BeginPaint(hwnd, &ps); 
+		EngineWindow::GetInstance().SetHDC(hdc);
 		EndPaint(hwnd, &ps);
 	}
 
@@ -42,7 +44,10 @@ LRESULT CALLBACK EngineWindow::MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wPara
 }
 
 
-
+HDC EngineWindow::GetHDC() const
+{
+	return wHdc;
+}
 
 void EngineWindow::WindowOpen(std::string_view _WindowName, std::pair<int, int> _StartPos, std::pair<int, int> _Scale)
 {
