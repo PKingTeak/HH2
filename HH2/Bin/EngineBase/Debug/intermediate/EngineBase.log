@@ -1,2 +1,5 @@
-﻿  MYImage.cpp
+﻿  FileLoad.cpp
+  MYImage.cpp
+  코드를 생성하고 있습니다...
+D:\HH2\HH2\EngineBase\FileLoad.cpp(101,1): warning C4715: 'FileLoad::LoadAsBinary': 모든 제어 경로에서 값을 반환하지는 않습니다.
   EngineBase.vcxproj -> D:\HH2\HH2\bin\EngineBase\Debug\EngineBase.lib

@@ -148,10 +148,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileLoad.cpp" />
     <ClCompile Include="MYImage.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileLoad.h" />
     <ClInclude Include="MYImage.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
