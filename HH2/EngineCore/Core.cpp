@@ -17,21 +17,10 @@ void Core::Init(HINSTANCE hInstance)
 		MessageBox(NULL, L"GDI+ 초기화 실패!", L"오류", MB_OK | MB_ICONERROR);
 		return;
 	}
-
-
-	const wchar_t* imagePath = L"D:\\HH2\\HH2\\resource\\test.png";
-	Himage = new MYImage(imagePath, 0, 0);
-	HDC hdc = EngineWindow::GetInstance().GetHDC();
+	//이걸 EngineWindow로 옮겨야 될듯 
 	
-	if (hdc != nullptr)
-	{
-		Himage->Draw(hdc);
-	}
-	else
-	{
-		MessageBox(NULL, L"HDC 또는 이미지 로딩 실패!", L"오류", MB_OK | MB_ICONERROR);
-	}
-	//이건 말도 안되는 구조임 
+	
+	
 }
 
 void Core::Tick()
@@ -44,6 +33,7 @@ void Core::Tick()
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+		
 		}
 	}
 }

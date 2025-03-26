@@ -19,9 +19,9 @@ class FileLoad
 	bool IsDirectory() const; 
 	
 
-	bool LoadAsText(); //텍스트로 로드 
-	bool LoadAsBinary(); //바이너리로 로드
-
+	//일단 모든 파일을 가져와야한다. 
+	std::vector<std::string> GetAllImage(std::string_view _Path);
+	
 	inline std::string GetText()const
 	{
 		return std::string(Buffer.begin(), Buffer.end());

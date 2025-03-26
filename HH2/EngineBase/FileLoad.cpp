@@ -63,7 +63,7 @@ bool FileLoad::IsDirectory() const
 {
 	return std::filesystem::is_directory(FilePath);
 }
-
+/*
 bool FileLoad::LoadAsText()
 {
 	if (!IsFile())
@@ -108,3 +108,5 @@ bool FileLoad::LoadAsBinary()
 	//이건 베껴옴 대신 분석해보자
 }
 
+
+*/
