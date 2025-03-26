@@ -3,6 +3,9 @@
 #include <windows.h>
 #include <string>
 #include <memory>
+#include "..\EngineBase\MYImage.h"
+
+
 class EngineWindow
 {
 public:
@@ -46,6 +49,8 @@ private:
 	HDC wHdc = nullptr;
 	static bool WindowLive; //윈도우창 켜져있나?
 	static HINSTANCE hInstance; //인스턴스 핸들
+
+	MYImage* WImage = nullptr;
 	
 
 };

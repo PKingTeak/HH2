@@ -1,10 +1,5 @@
 #include "FileLoad.h"
-
-FileLoad::FileLoad()
-{
-	FilePath=std::filesystem::current_path();
-	isLoaded = false;
-}
+#include <Windows.h>
 
 FileLoad::FileLoad(std::filesystem::path _path)
 {
@@ -12,13 +7,32 @@ FileLoad::FileLoad(std::filesystem::path _path)
 	isLoaded = false;
 }
 
-FileLoad::~FileLoad()
+
+std::vector<std::string> FileLoad::GetAllImage(std::string_view _Path)
 {
+	std::filesystem::path path(_Path);
+	if (!std::filesystem::exists(path)) 
+	{
+		MessageBoxA(nullptr, "폴더 경로가 존재하지 않습니다!", "FileLoad 에러", MB_OK | MB_ICONERROR);
+		return {};
+	}
 
+	ImageFile.clear();
 
+	for (const auto& i : std::filesystem::directory_iterator(path))
+	{
+		if (i.is_regular_file())
+		{
+			std::string ext = i.path().extension().string();
+			if (ext == ".png" || ext == ".bmp")
+			{
+				ImageFile.push_back(i.path().string());
+			}
+		}
+	}
+
+	return ImageFile;
 }
-
-
 
 void FileLoad::SetPath(std::string_view _Path)
 {

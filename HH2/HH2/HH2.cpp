@@ -3,7 +3,7 @@
 #include <gdiplus.h>
 #include "EngineBase/Transform.h"
 #include "EngineBase/MYImage.h"
-#include  "EnginePlatform/EngineWindow.h"
+#include "EnginePlatform/EngineWindow.h"
 #include "EngineCore/Core.h"
 
 // 윈도우 프로시저 함수 선언
@@ -17,6 +17,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	Core Engine;
 	Engine.Init(hInstance);
 	Engine.Tick();
+	
 	return 0;
 }
 

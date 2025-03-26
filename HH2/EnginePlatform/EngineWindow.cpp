@@ -1,5 +1,7 @@
 #include "EngineWindow.h"
 
+#include <gdiplus.h>
+
 bool EngineWindow::WindowLive = true;
 HINSTANCE EngineWindow::hInstance;
 
@@ -18,22 +20,55 @@ void EngineWindow::Init(HINSTANCE _hInstance)
 
 LRESULT CALLBACK EngineWindow::MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	static MYImage* WImage = nullptr;
+	static ULONG_PTR gdiplusToken;
+	static bool gdiInitialized = false;
+
 
 	switch (uMsg)
 	{
+	case  WM_CREATE:
+	{
+		if (!gdiInitialized)
+		{
+			Gdiplus::GdiplusStartupInput gdiStartupInput;
+			Gdiplus::GdiplusStartup(&gdiplusToken, &gdiStartupInput, nullptr);
+			gdiInitialized = true;
+		}
+		WImage = new MYImage(L"D:\\HH2\\HH2\\resource\\test.png", 0, 0);
+
+
+	}
+		break;
+
+
 	case WM_PAINT:
 	{
-		PAINTSTRUCT ps;              
+
+		PAINTSTRUCT ps;     
 		HDC hdc = BeginPaint(hwnd, &ps); 
+		if (WImage)
+		{
+			WImage->Draw(hdc);
+		}
 		EngineWindow::GetInstance().SetHDC(hdc);
 		EndPaint(hwnd, &ps);
+		return 0;
 	}
 
 	break;
 	case WM_DESTROY:
 	{
 		WindowLive = false;
-		break;
+		if (gdiInitialized)
+		{
+			Gdiplus::GdiplusShutdown(gdiplusToken);
+			gdiInitialized = false;
+		}
+		//delete WImage;
+		WImage = nullptr;
+		PostQuitMessage(0);
+	break;
 	}
 	default:
 		return DefWindowProcW(hwnd, uMsg, wParam, lParam);
