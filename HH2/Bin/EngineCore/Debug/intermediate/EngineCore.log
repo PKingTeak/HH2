@@ -1,2 +1,3 @@
 ﻿  Core.cpp
+D:\HH2\HH2\EngineCore\Core.cpp(13,62): warning C4129: '.': 인식할 수 없는 문자 이스케이프 시퀀스입니다.
   EngineCore.vcxproj -> D:\HH2\HH2\bin\EngineCore\Debug\EngineCore.lib

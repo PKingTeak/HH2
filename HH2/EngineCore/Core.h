@@ -1,6 +1,6 @@
 #pragma once
 #include "..\EnginePlatform\EngineWindow.h"
-
+#include "..\EngineBase\MYImage.h"
 
 class Core
 {
@@ -25,5 +25,7 @@ public:
 	void Init(HINSTANCE hInstance);
 	void Tick();
 
+private:
+	std::vector<MYImage*> LoadingImages; //목록 저장 
 };
 

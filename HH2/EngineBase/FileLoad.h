@@ -4,9 +4,10 @@
 #include <fstream> //파일 입출력 위해서 
 class FileLoad
 {
-	FileLoad();
+public:
+	FileLoad() = default;
 	FileLoad(std::filesystem::path _path);
-	~FileLoad();
+	~FileLoad() = default;
 
 	void SetPath(std::string_view _Path);//주소가 필요하겠지?
 	std::string GetFullPath() const;
@@ -35,6 +36,7 @@ class FileLoad
 
 private:
 	std::filesystem::path FilePath;
+	std::vector<std::string> ImageFile;
 	std::vector<char> Buffer;
 	bool isLoaded;
 
