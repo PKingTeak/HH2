@@ -9,9 +9,11 @@ void Core::Init(HINSTANCE hInstance)
 	EngineWindow::GetInstance().Init(hInstance);
 	EngineWindow::GetInstance().WindowOpen("MyWindow", { 100,100 }, { 800,600 });	 //윈도우 싱글톤
 
-	std::string A = std::filesystem::current_path().string();
 	FileLoad fileloader;
-	std::vector<std::string> imagePath = fileloader.GetAllImage("..\..\..\..\resource"); //GetParent() 로 변경해야함 
+
+	
+	fileloader.FindFloder("resource");
+	std::vector<std::string> imagePath = fileloader.GetAllImage(fileloader.CurPath().string()); //GetParent() 로 변경해야함 
 
 	
 	for (const auto& Path : imagePath)
@@ -58,4 +60,11 @@ void Core::Render(HDC hdc)
 	{
 		Image->Draw(hdc);
 	}
+}
+
+
+
+void Core::FindImage(std::string_view _ImageName)
+{
+	//여기 이미지들 넣어둘꺼임 
 }

@@ -29,7 +29,7 @@ private:
 	Gdiplus::Image* Image; 
 	int X, Y;
 	int width, height;
-
+	//std::string Name;
 	//배열 사용해서 이미지 여러개 저장해볼꺼임
 	std::vector<Gdiplus::Image*> Images;
 

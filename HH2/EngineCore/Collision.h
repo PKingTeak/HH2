@@ -5,15 +5,15 @@
 class Collision : public Transform
 {
 public:
-
+	inline Collision() : Transform(0, 0, 0, 0) {};
 	Collision(int _x, int _y, int _width, int _height)
 		: Transform(_x, _y, _width, _height)
 	{
-		//부모 생성과 동시에 초기화 시킴
 	}
-	~Collision();
+	~Collision() = default;
 
 	//크기를 가져와야하지 않을까?
+	//일단 생성자를 사용해서 충돌체를 만들것이다. 
 
 	
 	void ColCheck()
@@ -23,8 +23,6 @@ public:
 	}
 	
 private:
-	bool isCol;
-
 
 
 };

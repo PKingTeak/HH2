@@ -35,6 +35,8 @@ MYImage::~MYImage()
 	delete Image;
 }
 
+
+
 void MYImage::Draw(HDC& hdc)
 {
 	if (!Image)

@@ -31,6 +31,7 @@ public:
 	void Init(HINSTANCE hInstance);
 	void Tick();
 	void Render(HDC hdc);
+	void FindImage(std::string_view _ImageName);
 
 
 private:
@@ -38,6 +39,6 @@ private:
 	Core() = default;
 
 	std::vector<MYImage*> LoadingImages; //모든 이미지들을 가져와서 저장할것
-	//std::vector<Collision*? Collisions; //충돌체 저장할 에정 
+	
 };
 

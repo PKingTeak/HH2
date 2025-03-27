@@ -9,7 +9,7 @@ public:
 	FileLoad(std::filesystem::path _path);
 	~FileLoad() = default;
 
-	void SetPath(std::string_view _Path);//주소가 필요하겠지?
+	void SetPath(std::filesystem::path _Path);//주소가 필요하겠지?
 	std::string GetFullPath() const;
 	std::string GetFileName() const;
 	std::string GetExtension() const;
@@ -23,6 +23,18 @@ public:
 	//일단 모든 파일을 가져와야한다. 
 	std::vector<std::string> GetAllImage(std::string_view _Path);
 	
+	std::filesystem::path FindFloder(std::string_view _fileName);
+
+	inline std::filesystem::path CurPath()
+	{
+		return std::filesystem::current_path();
+	}
+
+	inline std::filesystem::path MoveParent()
+	{
+		FilePath.parent_path();
+	}
+	
 	inline std::string GetText()const
 	{
 		return std::string(Buffer.begin(), Buffer.end());
@@ -33,6 +45,8 @@ public:
 
 		return Buffer; //이건 수정 못하게 
 	}
+
+
 
 private:
 	std::filesystem::path FilePath;

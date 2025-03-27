@@ -12,7 +12,7 @@ FileLoad::FileLoad(std::filesystem::path _path)
 std::vector<std::string> FileLoad::GetAllImage(std::string_view _Path)
 {
 	std::filesystem::path path(_Path);
-	if (!std::filesystem::exists(path)) 
+	if (!std::filesystem::exists(path))
 	{
 		MessageBoxA(nullptr, "폴더 경로가 존재하지 않습니다!", "FileLoad 에러", MB_OK | MB_ICONERROR);
 		return {};
@@ -35,11 +35,31 @@ std::vector<std::string> FileLoad::GetAllImage(std::string_view _Path)
 	return ImageFile;
 }
 
-void FileLoad::SetPath(std::string_view _Path)
+
+std::filesystem::path FileLoad::FindFloder(std::string_view _fileName)
 {
-	FilePath = std::filesystem::path(_Path);
-	isLoaded = false;
-	Buffer.clear();
+	FilePath = CurPath();
+	while (!FilePath.empty())
+	{
+		std::filesystem::path target = FilePath / _fileName;
+
+		if (std::filesystem::exists(target) && std::filesystem::is_directory(target))
+		{
+			//return target; 이건 찾은거고 
+			return std::filesystem::canonical(target); // 폴더 안까지 들어가야함 
+		}
+
+		FilePath = FilePath.parent_path(); // 한 단계 위로 이동
+	}
+
+	throw std::runtime_error("찾는 폴더를 상위 경로에서 발견할 수 없습니다.");
+}
+
+
+
+void FileLoad::SetPath(std::filesystem::path _Path)
+{
+	FilePath = _Path;
 }
 
 std::string FileLoad::GetFullPath() const
@@ -78,50 +98,3 @@ bool FileLoad::IsDirectory() const
 {
 	return std::filesystem::is_directory(FilePath);
 }
-/*
-bool FileLoad::LoadAsText()
-{
-	if (!IsFile())
-	{
-		return false; //로드 안됨 
-	}
-
-	std::ifstream inFile(FilePath, std::ios::in);
-	if (!inFile)
-	{
-		return false;
-	}
-
-
-	Buffer = std::vector<char>((std::istreambuf_iterator<char>(inFile)), {}); //그 크기만큼 일단
-	inFile.close();
-	isLoaded = true;
-	return true;
-
-
-
-}
-
-
-
-bool FileLoad::LoadAsBinary()
-{
-	if (!IsFile()) return false;
-
-	std::ifstream inFile(FilePath, std::ios::binary | std::ios::ate);
-	if (!inFile) return false;
-
-	std::streamsize size = inFile.tellg();
-	inFile.seekg(0, std::ios::beg);
-
-	Buffer.resize(size);
-	inFile.read(Buffer.data(), size);
-	inFile.close();
-	isLoaded = true;
-	return true;
-
-	//이건 베껴옴 대신 분석해보자
-}
-
-
-*/
