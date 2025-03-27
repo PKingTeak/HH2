@@ -8,6 +8,7 @@ FileLoad::FileLoad(std::filesystem::path _path)
 }
 
 
+
 std::vector<std::string> FileLoad::GetAllImage(std::string_view _Path)
 {
 	std::filesystem::path path(_Path);
@@ -21,7 +22,7 @@ std::vector<std::string> FileLoad::GetAllImage(std::string_view _Path)
 
 	for (const auto& i : std::filesystem::directory_iterator(path))
 	{
-		if (i.is_regular_file())
+		if (i.is_regular_file()) //일반 파일인지 확인하는 함수 
 		{
 			std::string ext = i.path().extension().string();
 			if (ext == ".png" || ext == ".bmp")

@@ -15,6 +15,23 @@ public:
 		x += dx;
 		y += dy;	
 	}
+
+	inline POINT GetCenter() const
+	{
+		//
+		POINT center;
+		center.x = x * (width / 2);
+		center.y = y * (height / 2);
+		return { center.x,center.y };
+		//Áß½É ÁÂÇ¥ 
+	}
+
+	inline SIZE GetScale()const
+	{
+		return { x + width / 2,y + height / 2 };
+	
+	}
+	
 	
 	inline void GetRect(RECT& rect) const
 	{

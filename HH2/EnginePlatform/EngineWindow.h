@@ -35,6 +35,7 @@ private:
 	inline void SetHDC(HDC _Hdc)
 	{
 		wHdc = _Hdc;
+		//이건 내부에서 할거니까 어쩌피 상관 없고 
 	}
 
 	EngineWindow() = default; //기본생성자
