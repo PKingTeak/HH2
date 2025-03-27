@@ -21,7 +21,7 @@ public:
 	
 
 	//일단 모든 파일을 가져와야한다. 
-	std::vector<std::string> GetAllImage(std::string_view _Path);
+	std::vector<std::string> GetAllImage();
 	
 	std::filesystem::path FindFloder(std::string_view _fileName);
 

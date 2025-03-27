@@ -9,10 +9,10 @@ FileLoad::FileLoad(std::filesystem::path _path)
 
 
 
-std::vector<std::string> FileLoad::GetAllImage(std::string_view _Path)
+std::vector<std::string> FileLoad::GetAllImage()
 {
-	std::filesystem::path path(_Path);
-	if (!std::filesystem::exists(path))
+	
+	if (!std::filesystem::exists(FilePath))
 	{
 		MessageBoxA(nullptr, "폴더 경로가 존재하지 않습니다!", "FileLoad 에러", MB_OK | MB_ICONERROR);
 		return {};
@@ -20,7 +20,7 @@ std::vector<std::string> FileLoad::GetAllImage(std::string_view _Path)
 
 	ImageFile.clear();
 
-	for (const auto& i : std::filesystem::directory_iterator(path))
+	for (const auto& i : std::filesystem::directory_iterator(FilePath))
 	{
 		if (i.is_regular_file()) //일반 파일인지 확인하는 함수 
 		{

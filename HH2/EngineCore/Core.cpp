@@ -11,9 +11,8 @@ void Core::Init(HINSTANCE hInstance)
 
 	FileLoad fileloader;
 
-	
-	fileloader.FindFloder("resource");
-	std::vector<std::string> imagePath = fileloader.GetAllImage(fileloader.CurPath().string()); //GetParent() 로 변경해야함 
+	fileloader.SetPath(fileloader.FindFloder("resource"));
+	std::vector<std::string> imagePath = fileloader.GetAllImage(); //GetParent() 로 변경해야함 
 
 	
 	for (const auto& Path : imagePath)

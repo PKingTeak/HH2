@@ -1,2 +1,5 @@
-﻿  MYImage.cpp
+﻿  FileLoad.cpp
+D:\HH2\HH2\EngineBase\FileLoad.h(35,12): warning C4834: [[nodiscard]] 특성이 포함된 함수의 반환 값을 버리는 중입니다.
+  (소스 파일 'FileLoad.cpp'을(를) 컴파일하는 중)
+  
   EngineBase.vcxproj -> D:\HH2\HH2\bin\EngineBase\Debug\EngineBase.lib
