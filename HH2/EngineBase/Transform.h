@@ -39,6 +39,19 @@ public:
 		rect = { x, y, x + width, y + height };
 	}
 
+	inline void SetPos(int _x, int _y)
+	{
+		x = _x;
+		y = _y;
+	}
+
+	inline void SetScale(int _wid, int _hei)
+	{
+		width = _wid;
+		height = _hei;
+	}
+
+
 
 private:
 	int x, y;	

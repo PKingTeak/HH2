@@ -1,8 +1,8 @@
 #include "Actor.h"
 
-Actor::Actor(int _x, int _y, int _wid, int _hei)
+Actor::Actor()
 {
-	ActorCol = new Collision(_x, _y, _wid, _hei);
+	
 }
 
 
@@ -11,9 +11,16 @@ Actor ::~Actor()
 	delete ActorCol;
 	ActorCol = nullptr;
 }
-
-
-void SetRender(MYImage* _Image)
+void Actor::SetCol(int _x, int _y, int _wid, int _hei)
 {
-	//Core::GetInstanc().Render();
+	ActorCol = new Collision();
+	ActorCol->SetPos(_x, _y);
+	ActorCol->SetScale(_wid, _hei);
+}
+
+void Actor::SetRender(MYImage* _Image)
+{
+	Render.push_back(_Image);
+	
+
 }

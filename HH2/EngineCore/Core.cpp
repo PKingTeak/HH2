@@ -1,8 +1,4 @@
 #include "Core.h"
-#include <gdiplus.h>
-#include "..\EngineBase\MYImage.h"
-#include "..\EngineBase\FileLoad.h"
-#include <iostream>
 
 void Core::Init(HINSTANCE hInstance)
 {
@@ -19,11 +15,20 @@ void Core::Init(HINSTANCE hInstance)
 	{
 		std::wstring wpath(Path.begin(), Path.end());
 		MYImage* img = new MYImage(wpath.c_str(), 100, 100);
-
 		LoadingImages.push_back(img);// 이제 넣어 
 	}
 	
 	//Actor생성 할거임
+	//Test
+	Actor* Actor1 = new Actor;
+	Actor1->SetPos(100, 100);
+	Actor1->SetScale(200, 200);
+	Actor1->SetCol(100, 100, 200, 200);
+	Actors.push_back(Actor1);
+
+
+	POINT point = Actors[0]->GetCenter();
+	
 
 
 	//이걸 EngineWindow로 옮겨야 될듯 

@@ -19,6 +19,7 @@ public:
 	void ColCheck()
 	{
 		//위치로 체크를 해야하나?
+		
 
 	}
 	

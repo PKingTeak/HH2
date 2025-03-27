@@ -1,7 +1,11 @@
 #pragma once
 #include "..\EnginePlatform\EngineWindow.h"
 #include "..\EngineBase\MYImage.h"
+#include "..\EngineBase\FileLoad.h"
 
+#include <gdiplus.h>
+#include <iostream>
+#include "Actor.h"
 class Core
 {
 	
@@ -14,7 +18,6 @@ public:
 
 	~Core()
 	{
-		//여기 뭘해줘야할까
 		//
 	}
 
@@ -27,7 +30,6 @@ public:
 	
 	
 	
-
 	void Init(HINSTANCE hInstance);
 	void Tick();
 	void Render(HDC hdc);
@@ -39,6 +41,6 @@ private:
 	Core() = default;
 
 	std::vector<MYImage*> LoadingImages; //모든 이미지들을 가져와서 저장할것
-	
+	std::vector<Actor*> Actors;
 };
 
