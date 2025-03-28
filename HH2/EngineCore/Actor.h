@@ -10,6 +10,7 @@ public:
 	Actor();
 	~Actor();
 
+	void BeginPlay();
 	void SetRender(MYImage* _Image);
 	void SetCol(int _x, int _y, int _wid, int _hei);
 

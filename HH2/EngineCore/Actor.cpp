@@ -24,3 +24,9 @@ void Actor::SetRender(MYImage* _Image)
 	
 
 }
+
+
+void Actor::BeginPlay()
+{
+	
+}

@@ -6,6 +6,7 @@
 #include <gdiplus.h>
 #include <iostream>
 #include "Actor.h"
+
 class Core
 {
 	
