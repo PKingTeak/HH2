@@ -14,8 +14,3 @@ namespace LeckChecker
 
 	void OutPutDebugText(std::string_view _DebugText);
 }
-
-class LeckChecker
-{
-};
-

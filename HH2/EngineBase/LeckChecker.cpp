@@ -1,5 +1,6 @@
 #include "LeckChecker.h"
-namespace UEngineDebug
+
+namespace LeckChecker
 {
 	void OutPutDebugText(std::string_view _DebugText)
 	{
