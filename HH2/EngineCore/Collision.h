@@ -1,7 +1,7 @@
 
 #pragma once
 #include "..\EngineBase\Transform.h"
-
+#include<math.h>
 class Collision : public Transform
 {
 public:
@@ -16,12 +16,8 @@ public:
 	//일단 생성자를 사용해서 충돌체를 만들것이다. 
 
 	
-	void ColCheck()
-	{
-		//위치로 체크를 해야하나?
-		
 
-	}
+	bool AABB(Collision* _A, Collision* _B);
 	
 private:
 

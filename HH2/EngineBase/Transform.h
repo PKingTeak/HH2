@@ -50,10 +50,19 @@ public:
 		width = _wid;
 		height = _hei;
 	}
+	inline int Getwidth()
+	{
+		return width;
+	}
 
 
+	inline int Getheight()
+	{
+		return height;
+	}
 
-private:
+	
+protected:
 	int x, y;	
 	int width,height;
 };

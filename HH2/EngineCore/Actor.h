@@ -1,10 +1,9 @@
 #pragma once
 #include"Collision.h"
 #include"..\EngineBase\MYImage.h"
-#include<list>
+#include<vector>
 class Actor :public Collision
 {
-
 public:
 	
 	Actor();
@@ -14,8 +13,11 @@ public:
 	void SetRender(MYImage* _Image);
 	void SetCol(int _x, int _y, int _wid, int _hei);
 
+
+	void Render(HDC hdc);
+
 private:
 	Collision* ActorCol = nullptr;
-	std::list<MYImage*> Render;
+	std::vector<MYImage*> ActImages;
 };
 

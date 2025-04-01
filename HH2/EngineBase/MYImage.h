@@ -10,14 +10,9 @@ public:
 	~MYImage();	
 
 
-	void Draw(HDC& hdc);
+	void Draw(HDC& hdc, int _X, int _Y, int _wid, int _height);
 	
-	inline void Move(int dx, int dy)
-	{
-		X += dx;
-		Y += dy;
-	}
-
+	
 	inline void SetImages(const wchar_t* _FilePath)
 	{
 		Images.push_back(Image);
@@ -27,8 +22,6 @@ private:
 	
 
 	Gdiplus::Image* Image; 
-	int X, Y;
-	int width, height;
 	//std::string Name;
 	//배열 사용해서 이미지 여러개 저장해볼꺼임
 	std::vector<Gdiplus::Image*> Images;

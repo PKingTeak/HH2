@@ -2,6 +2,7 @@
 #include "..\EnginePlatform\EngineWindow.h"
 #include "..\EngineBase\MYImage.h"
 #include "..\EngineBase\FileLoad.h"
+#include "..\EngineBase\LeckChecker.h"
 
 #include <gdiplus.h>
 #include <iostream>
@@ -30,6 +31,8 @@ public:
 	
 	
 	
+
+	void Release();
 	
 	void Init(HINSTANCE hInstance);
 	void Tick();
@@ -40,7 +43,7 @@ public:
 private:
 
 	Core() = default;
-
+	
 	std::vector<MYImage*> LoadingImages; //모든 이미지들을 가져와서 저장할것
 	std::vector<Actor*> Actors;
 };

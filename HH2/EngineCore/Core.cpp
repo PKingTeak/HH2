@@ -23,11 +23,14 @@ void Core::Init(HINSTANCE hInstance)
 	Actor* Actor1 = new Actor;
 	Actor1->SetPos(100, 100);
 	Actor1->SetScale(200, 200);
-	Actor1->SetCol(100, 100, 200, 200);
+	
 	Actors.push_back(Actor1);
 
 
-	POINT point = Actors[0]->GetCenter();
+	Actor* Actor2 = new Actor;
+	Actor2->SetPos(500, 100);
+	Actor2->SetScale(200, 200);
+	Actors.push_back(Actor2);
 	
 
 
@@ -43,28 +46,25 @@ void Core::Tick()
 
 	while (EngineWindow::IsWindowLive())
 	{
+
 		HDC hdc = EngineWindow::GetInstance().GetHDC();
-		for (auto* img : LoadingImages)
-		{
-			img->Draw(hdc);
-		}
+		
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		
 		}
+		
 	}
 }
 
 
-void Core::Render(HDC hdc)
+void Core::Release()
 {
-	for (const auto& Image : LoadingImages)
-	{
-		Image->Draw(hdc);
-	}
+	//LeckChecker::
 }
+
 
 
 

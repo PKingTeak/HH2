@@ -35,9 +35,6 @@ LRESULT CALLBACK EngineWindow::MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wPara
 			Gdiplus::GdiplusStartup(&gdiplusToken, &gdiStartupInput, nullptr);
 			gdiInitialized = true;
 		}
-		WImage = new MYImage(L"D:\\HH2\\HH2\\resource\\test.png", 0, 0);
-
-
 	}
 		break;
 
@@ -47,10 +44,6 @@ LRESULT CALLBACK EngineWindow::MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wPara
 
 		PAINTSTRUCT ps;     
 		HDC hdc = BeginPaint(hwnd, &ps); 
-		if (WImage)
-		{
-			WImage->Draw(hdc);
-		}
 		EngineWindow::GetInstance().SetHDC(hdc);
 		EndPaint(hwnd, &ps);
 		return 0;
