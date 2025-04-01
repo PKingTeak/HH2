@@ -36,7 +36,7 @@ public:
 	
 	void Init(HINSTANCE hInstance);
 	void Tick();
-	void Render(HDC hdc);
+	//void Render(HDC hdc);
 	void FindImage(std::string_view _ImageName);
 
 

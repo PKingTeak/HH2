@@ -1,7 +1,14 @@
 #include "Collision.h"
 
 
-bool AABB(Collision* _A, Collision* _B)
+void Collision::SettingTag(int _order, std::string _Name)
+{
+	ColTag.insert(std::make_pair(_order, _Name));
+}
+
+
+
+bool Collision::AABB(Collision* _A, Collision* _B)
 {
 	POINT Apoint = _A->GetCenter();
 	POINT BPoint = _B->GetCenter();

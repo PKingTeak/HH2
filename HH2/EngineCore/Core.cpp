@@ -20,9 +20,11 @@ void Core::Init(HINSTANCE hInstance)
 	
 	//Actor생성 할거임
 	//Test
-	Actor* Actor1 = new Actor;
-	Actor1->SetPos(100, 100);
-	Actor1->SetScale(200, 200);
+	Actor* Actor1 = new Actor; //이미 태크 생성
+	Actor1->SetPos(100, 100); //포지션
+	Actor1->SetScale(200, 200); //크기
+	Actor1->SetImage(LoadingImages[0]); //이미지 넣었고 
+	
 	
 	Actors.push_back(Actor1);
 

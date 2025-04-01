@@ -61,6 +61,15 @@ public:
 		return height;
 	}
 
+	inline int GetXpos()
+	{
+		return x;
+	}
+	inline int GetYPos()
+	{
+		return y;
+	}
+	
 	
 protected:
 	int x, y;	
