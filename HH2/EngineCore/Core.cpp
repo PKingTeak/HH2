@@ -2,6 +2,18 @@
 
 void Core::Init(HINSTANCE hInstance)
 {
+
+
+	static bool gdiInitialized = false;
+	static ULONG_PTR gdiplusToken;
+
+	if (!gdiInitialized)
+	{
+		Gdiplus::GdiplusStartupInput gdiStartupInput;
+		Gdiplus::GdiplusStartup(&gdiplusToken, &gdiStartupInput, nullptr);
+		gdiInitialized = true;
+	}
+
 	EngineWindow::GetInstance().Init(hInstance);
 	EngineWindow::GetInstance().WindowOpen("MyWindow", { 100,100 }, { 800,600 });	 //À©µµ¿ì ½Ì±ÛÅæ
 
@@ -30,8 +42,9 @@ void Core::Init(HINSTANCE hInstance)
 
 
 	Actor* Actor2 = new Actor;
-	Actor2->SetPos(500, 100);
+	Actor2->SetPos(150, 100);
 	Actor2->SetScale(200, 200);
+	Actor2->SetImage(LoadingImages[1]);
 	Actors.push_back(Actor2);
 	
 
@@ -49,7 +62,6 @@ void Core::Tick()
 	while (EngineWindow::IsWindowLive())
 	{
 
-		HDC hdc = EngineWindow::GetInstance().GetHDC();
 		
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
@@ -57,10 +69,21 @@ void Core::Tick()
 			DispatchMessage(&msg);
 		
 		}
-		
+		Rendering();
+				
 	}
 }
 
+void Core::Rendering()
+{
+	HWND hwnd = EngineWindow::GetInstance().GetHWND();
+	HDC hdc = GetDC(hwnd);
+	for (int i = 0; i < Actors.size(); i++)
+	{
+		Actors[i]->Render(hdc);
+	}
+	ReleaseDC(hwnd, hdc);
+}
 
 void Core::Release()
 {

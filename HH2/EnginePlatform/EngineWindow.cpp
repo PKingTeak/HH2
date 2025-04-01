@@ -29,12 +29,7 @@ LRESULT CALLBACK EngineWindow::MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wPara
 	{
 	case  WM_CREATE:
 	{
-		if (!gdiInitialized)
-		{
-			Gdiplus::GdiplusStartupInput gdiStartupInput;
-			Gdiplus::GdiplusStartup(&gdiplusToken, &gdiStartupInput, nullptr);
-			gdiInitialized = true;
-		}
+		
 	}
 		break;
 
@@ -45,6 +40,8 @@ LRESULT CALLBACK EngineWindow::MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wPara
 		PAINTSTRUCT ps;     
 		HDC hdc = BeginPaint(hwnd, &ps); 
 		EngineWindow::GetInstance().SetHDC(hdc);
+
+		//Core::GetInstance().Rendering();
 		EndPaint(hwnd, &ps);
 		return 0;
 	}
@@ -72,9 +69,10 @@ LRESULT CALLBACK EngineWindow::MainWindowProc(HWND hwnd, UINT uMsg, WPARAM wPara
 }
 
 
-HDC EngineWindow::GetHDC() const
+
+HWND EngineWindow::GetHWND() const
 {
-	return wHdc;
+	return hWnd;
 }
 
 void EngineWindow::WindowOpen(std::string_view _WindowName, std::pair<int, int> _StartPos, std::pair<int, int> _Scale)
@@ -111,7 +109,7 @@ void EngineWindow::WindowOpen(std::string_view _WindowName, std::pair<int, int> 
 
 #pragma endregion
 
-
+	this->hWnd = hwnd;
 	ShowWindow(hwnd, SW_SHOW);
 	UpdateWindow(hwnd);
 	// 메시지 루프

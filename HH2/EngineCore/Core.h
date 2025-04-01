@@ -12,7 +12,7 @@ class Core
 {
 	
 public:
-	static Core& GetInstanc()
+	static Core& GetInstance()
 	{
 		static Core instance;
 		return instance;
@@ -30,6 +30,8 @@ public:
 	Core& operator=(Core&& _Other) noexcept = delete;
 	
 	
+
+	void Rendering();
 	
 
 	void Release();
@@ -39,7 +41,7 @@ public:
 	//void Render(HDC hdc);
 	void FindImage(std::string_view _ImageName);
 
-
+	
 private:
 
 	Core() = default;

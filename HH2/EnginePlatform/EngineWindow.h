@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include "..\EngineBase\MYImage.h"
+#include "..\EngineCore\Core.h"
 
 
 class EngineWindow
@@ -27,8 +28,7 @@ public:
 		return WindowLive;
 	}
 	
-	HDC GetHDC() const;
-	
+	HWND GetHWND() const;
 
 private:
 

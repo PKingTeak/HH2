@@ -27,6 +27,7 @@ bool Collision::AABB(Collision* _A, Collision* _B)
 
 	if (dx <= HwidthA + HwidthB && dy <= HheightA + HheightB)
 	{
+		MessageBox(NULL,0, L"충돌확인", MB_OK);
 		return true;
 	}
 	else

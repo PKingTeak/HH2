@@ -17,7 +17,7 @@ public:
 	//이미지 셋팅도 필요함
 	inline void SetImage(MYImage* _Image)
 	{
-		//콜리전도 같이 적용시켜야될듯
+		
 		ActorImage = _Image;
 		//근데 삭제되면 안될듯 한데
 	}
