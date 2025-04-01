@@ -3,7 +3,7 @@
 
 void Collision::SettingTag(int _order, std::string _Name)
 {
-	ColTag.insert(std::make_pair(_order, _Name));
+	//ColTag.insert(std::make_pair(_order, _Name));
 }
 
 

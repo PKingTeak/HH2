@@ -3,10 +3,12 @@
 #include "..\EngineBase\MYImage.h"
 #include "..\EngineBase\FileLoad.h"
 #include "..\EngineBase\LeckChecker.h"
+#include "..\EngineCore\Collision.h"
 
 #include <gdiplus.h>
 #include <iostream>
 #include "Actor.h"
+
 
 class Core
 {

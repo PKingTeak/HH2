@@ -41,7 +41,7 @@ public:
 	void SettingTag(int _order, std::string _Name);
 	bool FindTag(int _order);
 
-	bool AABB(Collision* _A, Collision* _B);
+	static bool AABB(Collision* _A, Collision* _B);
 	
 
 	inline void SettingTag(Tag _tag)
@@ -56,7 +56,7 @@ public:
 
 	
 protected:
-	static std::map<int, std::string> ColTag;
+	//static std::map<int, std::string> ColTag;
 	
 	Tag tag = Tag::BackGround;
 

@@ -69,6 +69,12 @@ void Core::Tick()
 			DispatchMessage(&msg);
 		
 		}
+
+		if (Collision::AABB(Actors[0], Actors[1]))
+		{
+			std::cout << "Ãæµ¹!" << std::endl;
+		}
+		
 		Rendering();
 				
 	}
