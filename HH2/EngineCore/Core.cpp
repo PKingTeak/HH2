@@ -43,7 +43,7 @@ void Core::Init(HINSTANCE hInstance)
 
 
 	Actor* Actor2 = new Actor;
-	Actor2->SetPos(150, 100);
+	Actor2->SetPos(500, 100);
 	Actor2->SetScale(200, 200);
 	//이걸 카리나 클래스에서 생성하면서 넣어주기
 	Actor2->SetImage(LoadingImages[1]);
@@ -71,11 +71,11 @@ void Core::Tick()
 			DispatchMessage(&msg);
 		
 		}
-
-		
+		Actors[1]->Move(-10, 0);
 		
 		Rendering();
-				
+	
+		Sleep(20);
 	}
 }
 
@@ -93,6 +93,12 @@ void Core::Rendering()
 {
 	HWND hwnd = EngineWindow::GetInstance().GetHWND();
 	HDC hdc = GetDC(hwnd);
+		
+	RECT rc;
+	GetClientRect(hwnd, &rc);
+	HBRUSH hbrush = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	FillRect(hdc, &rc, hbrush);
+
 	for (int i = 0; i < Actors.size(); i++)
 	{
 		Actors[i]->Render(hdc);
