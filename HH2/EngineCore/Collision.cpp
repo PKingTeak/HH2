@@ -1,9 +1,11 @@
 #include "Collision.h"
 
+std::map<Collision::Tag, std::set<Collision::Tag>> Collision::ColTag; //전역 선언 
 
 void Collision::SettingTag(int _order, std::string _Name)
 {
-	//ColTag.insert(std::make_pair(_order, _Name));
+	ColTag[Tag::Actor].insert(Tag::Object);
+	ColTag[Tag::Object].insert(Tag::Actor);
 }
 
 

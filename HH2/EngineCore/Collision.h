@@ -4,6 +4,7 @@
 #include<math.h>
 #include<string>
 #include<map>
+#include<set>
 
 
 
@@ -57,7 +58,7 @@ public:
 
 	
 protected:
-	//static std::map<int, std::string> ColTag;
+	static std::map<Tag, std::set<Tag>> ColTag;
 	
 	Tag tag = Tag::BackGround;
 
