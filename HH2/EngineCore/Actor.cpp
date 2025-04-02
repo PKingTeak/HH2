@@ -12,7 +12,15 @@ Actor ::~Actor()
 
 	
 }
-
+void Actor::ChangeObject(Actor* _Other)
+{
+	bool isCon = this->AABB(this, _Other);
+	if (isCon == true)
+	{
+		_Other->SetImage(ActorImage);
+	}
+	
+}
 
 
 void Actor::Render(HDC hdc)

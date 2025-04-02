@@ -56,6 +56,7 @@ public:
 		return tag;
 	}
 
+
 	
 protected:
 	static std::map<Tag, std::set<Tag>> ColTag;

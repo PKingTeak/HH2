@@ -34,20 +34,22 @@ void Core::Init(HINSTANCE hInstance)
 	}
 	//
 	
-	Actor* NewActor = SpawnActor<Actor>("Test1"); //이런 느낌으로 만들어
+	Actor* NewActor = SpawnActor<Actor>("Player"); //이런 느낌으로 만들어
 	//그리고 예를들어서 0번째는 플레이어다 하면 
 	Actors[0]->SetPos(100, 100); //포지션
 	Actors[0]->SetScale(200, 200); //크기
 	Actors[0]->SetImage(LoadingImages[0]); //이미지 넣었고 
 	
 
+	
 
 	Actor* Actor2 = new Actor;
 	Actor2->SetPos(500, 100);
 	Actor2->SetScale(200, 200);
 	//이걸 카리나 클래스에서 생성하면서 넣어주기
 	Actor2->SetImage(LoadingImages[1]);
-	Actors.push_back(Actor2); //스폰엑터로 변경
+	Actor2->SettingTag(Collision::Tag::Object);
+	Object.push_back(Actor2); //스폰엑터로 변경
 	
 
 
@@ -71,20 +73,36 @@ void Core::Tick()
 			DispatchMessage(&msg);
 		
 		}
-		Actors[1]->Move(-10, 0);
+		Actors[0]->Move(10, 0);
 		
 		Rendering();
-	
+		CollCheck();
+		//여기서 판정을 어떻게 해야하지..
 		Sleep(20);
 	}
 }
 
-void Core::CollCheck(Actor* _other)
+void Core::CollCheck()
 {
-
 	for (int i = 0; i < Actors.size(); i++)
 	{
-		Actors[i]->AABB(Actors[i],_other);
+		for (int j = 0; j < Object.size(); j++)
+		{
+			Actor* _AC = Actors[i];
+			Actor* _OB = Object[i];
+
+			if (Collision::AABB(_AC, _OB))
+			{
+				Collision::Tag tagA = _AC->GetTag();
+				Collision::Tag tagB = _OB->GetTag();//tag가져와 
+
+				if (tagA == Collision::Tag::Actor && tagB == Collision::Tag::Object)
+				{
+					_OB->SetImage(_AC->GetImage());
+				}
+				
+			}
+		}
 	}
 	
 }
@@ -102,6 +120,10 @@ void Core::Rendering()
 	for (int i = 0; i < Actors.size(); i++)
 	{
 		Actors[i]->Render(hdc);
+	}
+	for (int i = 0; i < Object.size(); i++)
+	{
+		Object[i]->Render(hdc);
 	}
 	ReleaseDC(hwnd, hdc);
 }

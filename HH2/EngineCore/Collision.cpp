@@ -1,11 +1,13 @@
 #include "Collision.h"
 
+
 std::map<Collision::Tag, std::set<Collision::Tag>> Collision::ColTag; //전역 선언 
 
 void Collision::SettingTag(int _order, std::string _Name)
 {
 	ColTag[Tag::Actor].insert(Tag::Object);
 	ColTag[Tag::Object].insert(Tag::Actor);
+	//태그 설정 
 }
 
 
@@ -26,10 +28,11 @@ bool Collision::AABB(Collision* _A, Collision* _B)
 	int HwidthB = _B->Getwidth();
 	int HheightB = _B->Getheight();
 
+	
 
 	if (dx <= HwidthA + HwidthB && dy <= HheightA + HheightB)
 	{
-		MessageBox(NULL,0, L"충돌확인", MB_OK);
+		//MessageBox(NULL,0, L"충돌확인", MB_OK);
 		return true;
 	}
 	else

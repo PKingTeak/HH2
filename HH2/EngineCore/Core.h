@@ -8,7 +8,7 @@
 #include <gdiplus.h>
 #include <iostream>
 #include "Actor.h"
-
+#include "Player.h"
 
 class Core
 {
@@ -43,7 +43,7 @@ public:
 	//void Render(HDC hdc);
 	void FindImage(std::string_view _ImageName);
 	
-	void CollCheck(Actor* _other);
+	void CollCheck();
 
 	//스폰엑터 만들고 
 	template<typename T>
@@ -60,7 +60,7 @@ public:
 		Actors.push_back(SActor);
 		return SActor;
 		//나중에 string으로 해서 해당엑터를 find 하고 그후 그 엑터의 세부설정을 해주는 방식을 사용해 볼것이다. 
-		//오늘 질문할꺼 assert() 사용방법 잘 모름 
+		//오늘 질문할꺼 assert() 사용방법 잘 모름 완벽하게 모르는듯
 		
 	}
 	//
@@ -73,5 +73,6 @@ private:
 	
 	std::vector<MYImage*> LoadingImages; //모든 이미지들을 가져와서 저장할것
 	std::vector<Actor*> Actors;
+	std::vector<Actor*> Object; //이거 임시용
 };
 
