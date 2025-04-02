@@ -39,7 +39,8 @@ public:
 		height = _height;	
 	}
 	void SettingTag(int _order, std::string _Name);
-	bool FindTag(int _order);
+	
+	//bool FindTag(int _order);
 
 	static bool AABB(Collision* _A, Collision* _B);
 	

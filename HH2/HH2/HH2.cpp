@@ -15,8 +15,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 {
 
 	Core::GetInstance().Init(hInstance);
-	Core::GetInstance().Rendering();
 	Core::GetInstance().Tick();
+	
 	return 0;
 }
 

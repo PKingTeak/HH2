@@ -1,12 +1,10 @@
 #include "Actor.h"
 
+
 Actor::Actor()
 {
 	tag = Tag::Actor;
 }
-
-
-
 
 Actor ::~Actor() 
 {
@@ -14,9 +12,6 @@ Actor ::~Actor()
 
 	
 }
-
-
-
 
 
 

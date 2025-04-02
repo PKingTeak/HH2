@@ -13,7 +13,9 @@ void Core::Init(HINSTANCE hInstance)
 		Gdiplus::GdiplusStartup(&gdiplusToken, &gdiStartupInput, nullptr);
 		gdiInitialized = true;
 	}
-
+	//비추
+	//Init이 너무 많음
+	//이미지 initize같은거 만들어서 묶어서
 	EngineWindow::GetInstance().Init(hInstance);
 	EngineWindow::GetInstance().WindowOpen("MyWindow", { 100,100 }, { 800,600 });	 //윈도우 싱글톤
 
@@ -21,6 +23,7 @@ void Core::Init(HINSTANCE hInstance)
 
 	fileloader.SetPath(fileloader.FindFloder("resource"));
 	std::vector<std::string> imagePath = fileloader.GetAllImage(); //GetParent() 로 변경해야함 
+	//이거 복사해서 가져오면 폴더 복사여서 ㅈㄴ커짐 이거 수정하는게 좋을듯 
 
 	
 	for (const auto& Path : imagePath)
@@ -29,23 +32,22 @@ void Core::Init(HINSTANCE hInstance)
 		MYImage* img = new MYImage(wpath.c_str(), 100, 100);
 		LoadingImages.push_back(img);// 이제 넣어 
 	}
+	//
 	
-	//Actor생성 할거임
-	//Test
-	Actor* Actor1 = new Actor; //이미 태크 생성
-	Actor1->SetPos(100, 100); //포지션
-	Actor1->SetScale(200, 200); //크기
-	Actor1->SetImage(LoadingImages[0]); //이미지 넣었고 
+	Actor* NewActor = SpawnActor<Actor>("Test1"); //이런 느낌으로 만들어
+	//그리고 예를들어서 0번째는 플레이어다 하면 
+	Actors[0]->SetPos(100, 100); //포지션
+	Actors[0]->SetScale(200, 200); //크기
+	Actors[0]->SetImage(LoadingImages[0]); //이미지 넣었고 
 	
-	
-	Actors.push_back(Actor1);
 
 
 	Actor* Actor2 = new Actor;
 	Actor2->SetPos(150, 100);
 	Actor2->SetScale(200, 200);
+	//이걸 카리나 클래스에서 생성하면서 넣어주기
 	Actor2->SetImage(LoadingImages[1]);
-	Actors.push_back(Actor2);
+	Actors.push_back(Actor2); //스폰엑터로 변경
 	
 
 
@@ -70,14 +72,21 @@ void Core::Tick()
 		
 		}
 
-		if (Collision::AABB(Actors[0], Actors[1]))
-		{
-			std::cout << "충돌!" << std::endl;
-		}
+		
 		
 		Rendering();
 				
 	}
+}
+
+void Core::CollCheck(Actor* _other)
+{
+
+	for (int i = 0; i < Actors.size(); i++)
+	{
+		Actors[i]->AABB(Actors[i],_other);
+	}
+	
 }
 
 void Core::Rendering()

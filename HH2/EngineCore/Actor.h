@@ -1,6 +1,7 @@
 #pragma once
 #include"Collision.h"
 #include"..\EngineBase\MYImage.h"
+#include<string>
 #include<vector>
 class Actor :public Collision
 {
@@ -11,8 +12,6 @@ public:
 
 	void BeginPlay();
 	
-	
-
 	void Render(HDC hdc);
 	//이미지 셋팅도 필요함
 	inline void SetImage(MYImage* _Image)
@@ -22,10 +21,13 @@ public:
 		//근데 삭제되면 안될듯 한데
 	}
 	
-	
+	inline void SetName(std::string_view _Name)
+	{
+		Name = _Name;
+	}
 private:
 	
-	
+	std::string Name;
 	MYImage* ActorImage = nullptr;
 };
 
