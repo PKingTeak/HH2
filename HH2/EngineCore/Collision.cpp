@@ -15,24 +15,30 @@ void Collision::SettingTag(int _order, std::string _Name)
 bool Collision::AABB(Collision* _A, Collision* _B)
 {
 	POINT Apoint = _A->GetCenter();
-	POINT BPoint = _B->GetCenter();
+	POINT Bpoint = _B->GetCenter();
 
 
-	int dx = abs(Apoint.x - BPoint.x);
-	int dy = abs(Apoint.y- BPoint.y);
+	int dx = abs(Apoint.x - Bpoint.x);
+	int dy = abs(Apoint.y- Bpoint.y);
 	
 
-	int HwidthA = _A->Getwidth();
-	int HheightA = _A->Getheight();
+	int Aleft = Apoint.x -_A->Getwidth()/2;
+	int ARight = Apoint.x + _A->Getwidth() / 2;
+	int ATop = Apoint.y - _A->Getheight() / 2;
+	int ABottom = Apoint.y + _A->Getheight() / 2;
 
-	int HwidthB = _B->Getwidth();
-	int HheightB = _B->Getheight();
 
 	
+	int Bleft = Bpoint.x - _B->Getwidth() / 2;
+	int BRight = Bpoint.x + _B->Getwidth() / 2;
+	int BTop = Bpoint.y - _B->Getheight() / 2;
+	int BBottom = Bpoint.y + _B->Getheight() / 2;
+	
+	bool ABhorizon = Aleft<=BRight && ARight  >=Bleft;
+	bool ABperpen = ATop <= BBottom && ABottom >= BTop;
 
-	if (dx <= HwidthA + HwidthB && dy <= HheightA + HheightB)
+	if (ABhorizon && ABperpen)
 	{
-		//MessageBox(NULL,0, L"충돌확인", MB_OK);
 		return true;
 	}
 	else
@@ -40,8 +46,7 @@ bool Collision::AABB(Collision* _A, Collision* _B)
 		return false;
 	}
 
-	//계산을 근데 매번 이렇게 해야하나
-//	int distance = sqrt((dx * dx) + (dy * dy)); //두점 사이의 거리
+	
 
 	
 
