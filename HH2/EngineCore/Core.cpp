@@ -89,7 +89,7 @@ void Core::CollCheck()
 		for (int j = 0; j < Object.size(); j++)
 		{
 			Actor* _AC = Actors[i];
-			Actor* _OB = Object[i];
+			Actor* _OB = Object[j]; //허걱슨 i 와 j 이딴 실수 하지마셈
 
 			if (Collision::AABB(_AC, _OB))
 			{
@@ -125,6 +125,10 @@ void Core::Rendering()
 	{
 		Object[i]->Render(hdc);
 	}
+	//더블버퍼링
+	//캔버스가 두개 
+	//hdc가 두개 생기는것이다. 
+
 	ReleaseDC(hwnd, hdc);
 }
 

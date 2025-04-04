@@ -18,6 +18,7 @@ public:
 	Actor = 1,
 	Object = 2
 
+	//
 	};
 
 public:
@@ -26,6 +27,7 @@ public:
 	Collision(int _x, int _y, int _width, int _height)
 		: Transform(_x, _y, _width, _height)
 	{
+		//여기 부모 생성자 하면 부모 홀수됨
 	}
 	~Collision() = default;
 
