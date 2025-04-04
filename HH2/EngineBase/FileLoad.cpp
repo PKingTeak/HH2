@@ -9,7 +9,7 @@ FileLoad::FileLoad(std::filesystem::path _path)
 
 
 
-std::vector<std::string> FileLoad::GetAllImage()
+const std::vector<std::string>& FileLoad::GetAllImage() //파일 모든걸 복사해서 가져오면 용량이 감당이 안된다. 그래서 래퍼런스화 시켯음 
 {
 	
 	if (!std::filesystem::exists(FilePath))

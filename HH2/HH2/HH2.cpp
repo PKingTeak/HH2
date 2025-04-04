@@ -15,7 +15,8 @@
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) //윈도우 메인함수 histance는 왜 값일까? 포인터로 주면 본체에도 영향이 가기 때문에 값으로 준다.
 {
 	LeakCheck;
-
+	
+	
 	Core::GetInstance().Init(hInstance);
 	Core::GetInstance().Tick();
 	
