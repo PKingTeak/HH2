@@ -1,2 +1,8 @@
-﻿  Transform.cpp
+﻿  FileLoad.cpp
+D:\HH2\HH2\EngineBase\FileLoad.h(35,12): warning C4834: [[nodiscard]] 특성이 포함된 함수의 반환 값을 버리는 중입니다.
+  (소스 파일 'FileLoad.cpp'을(를) 컴파일하는 중)
+  
+  MYImage.cpp
+  코드를 생성하고 있습니다...
+D:\HH2\HH2\EngineBase\FileLoad.cpp(18,1): warning C4172: 지역 변수 또는 임시 의 주소를 반환하는 중
   EngineBase.vcxproj -> D:\HH2\HH2\bin\EngineBase\Debug\EngineBase.lib

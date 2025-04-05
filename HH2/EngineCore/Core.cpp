@@ -112,19 +112,40 @@ void Core::Rendering()
 	HWND hwnd = EngineWindow::GetInstance().GetHWND();
 	HDC hdc = GetDC(hwnd);
 		
+
+
+
+
+
 	RECT rc;
 	GetClientRect(hwnd, &rc);
 	HBRUSH hbrush = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	FillRect(hdc, &rc, hbrush);
 
+	int Width = rc.right - rc.left;
+	int Height = rc.bottom - rc.top;
+
+	// 메모리 DC 생성
+	HDC memDC = CreateCompatibleDC(hdc);
+	HBITMAP memBitmap = CreateCompatibleBitmap(hdc, Width, Height);
+	HBITMAP oldBitmap = (HBITMAP)SelectObject(memDC, memBitmap);	
+
+	// 메모리 DC를 흰색으로 지우기 
+	HBRUSH hBrush = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	FillRect(memDC, &rc, hBrush);
+
+
 	for (int i = 0; i < Actors.size(); i++)
 	{
-		Actors[i]->Render(hdc);
+		Actors[i]->Render(memDC); //hdc에 직접 그리는 것이 아닌 memDC에 그리고 그것을 복사하는 방식으로 사용할 것이다. 
 	}
 	for (int i = 0; i < Object.size(); i++)
 	{
-		Object[i]->Render(hdc);
+		Object[i]->Render(memDC);
 	}
+
+
+
 	//더블버퍼링
 	//캔버스가 두개 
 	//hdc가 두개 생기는것이다. 
@@ -134,6 +155,22 @@ void Core::Rendering()
 
 void Core::Release()
 {
+
+	MYImage* img = nullptr;
+	for (int i = 0; i < LoadingImages.size(); i++)
+	{
+		img = LoadingImages[i];
+		delete img;
+	}
+	for (int i = 0; i < Actors.size(); i++)
+	{
+		delete Actors[i];
+	}
+	for (int i = 0; i < Object.size(); i++)
+	{
+		delete Object[i];
+	}
+	//전부 삭제 
 	//LeckChecker::
 }
 
